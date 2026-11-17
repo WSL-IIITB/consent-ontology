@@ -1,0 +1,722 @@
+@prefix : <http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix consent-ontology-dpi: <http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi#> .
+@base <http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/> .
+
+<http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi> rdf:type owl:Ontology ;
+                                                                     rdfs:comment "Consent Management Ontology" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/appliesTo
+:appliesTo rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdf:type owl:AsymmetricProperty ;
+           rdfs:range :ModeOfConsent ,
+                      :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/conferredBy
+:conferredBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :confers ;
+             rdfs:domain :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/confers
+:confers rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdf:type owl:InverseFunctionalProperty ;
+         rdfs:range :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/consentRequestedBy
+:consentRequestedBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    owl:inverseOf :requestsConsentFor ;
+                    rdfs:domain :ModeOfConsent .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/givenByMode
+:givenByMode rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :DataArtefact ;
+             rdfs:range :ModeOfConsent .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/givenConsentBy
+:givenConsentBy rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                owl:inverseOf :givesConsentThrough .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/givesConsentThrough
+:givesConsentThrough rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain :DataPrincipal ;
+                     rdfs:range :ModeOfConsent .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/has
+:has rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/hasContext
+:hasContext rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/hasDataOwner
+:hasDataOwner rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              owl:inverseOf :owns ;
+              rdfs:domain :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/hasPathology
+:hasPathology rdf:type owl:ObjectProperty ;
+              rdfs:domain [ owl:intersectionOf ( :ModeOfConsent
+                                                 :RealmOfConsentObject
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+              rdfs:range :ConsentPathology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/hasRealm
+:hasRealm rdf:type owl:ObjectProperty ;
+          rdfs:domain :DataArtefact ;
+          rdfs:range :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/isSubjectTo
+:isSubjectTo rdf:type owl:ObjectProperty ;
+             rdfs:domain :ModeOfConsent ;
+             rdfs:range :ConsentPathology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/owns
+:owns rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty ;
+      rdfs:domain :DataPrincipal ;
+      rdfs:range :DataArtefact .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/pledgedBy
+:pledgedBy rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           owl:inverseOf :pledges ;
+           rdfs:domain :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/pledges
+:pledges rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:range :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/requestsConsentFor
+:requestsConsentFor rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain :DataRequestor ;
+                    rdfs:range :DataArtefact .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/sharedBy
+:sharedBy rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf :shares ;
+          rdfs:domain :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/shares
+:shares rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdfs:range :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/transferredBy
+:transferredBy rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               owl:inverseOf :transfers ;
+               rdfs:domain :RealmOfConsentObject .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/transfers
+:transfers rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:range :RealmOfConsentObject .
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdfs:domain :Connection ;
+                      rdfs:range :DataArtefact .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi#DataOwner
+consent-ontology-dpi:DataOwner rdf:type owl:Class ;
+                               rdfs:subClassOf :ConsentPathologyOntology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/AlgorithmicallySuperceded
+:AlgorithmicallySuperceded rdf:type owl:Class ;
+                           rdfs:subClassOf :NonParticipatory ;
+                           owl:disjointWith :Implied ;
+                           rdfs:comment "Data Principal’s consent to data collection is overridden by algorithmic sorting and categorisation of data, based on user activity on a platform, where the Data Principal may not be aware of the manner in, or purpose for which the data is so categorised." ;
+                           rdfs:isDefinedBy "Data Principal’s consent to data collection is overridden by algorithmic sorting and categorisation of data, based on user activity on a platform, where the Data Principal may not be aware of the manner in, or purpose for which the data is so categorised." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Alienable
+:Alienable rdf:type owl:Class ;
+           rdfs:subClassOf :Intrinsic ;
+           owl:disjointWith :Inalienable ;
+           rdfs:comment "Data Artefact is private/personal to the Data Principal, is associated with the personhood of the Data Principal, and can be separated from the Data Principal. E.g. Intellectual property, Identity documents, Degree certificates." ;
+           rdfs:isDefinedBy "Data Artefact is private/personal to the Data Principal, is associated with the personhood of the Data Principal, and can be separated from the Data Principal. E.g. Intellectual property, Identity documents, Degree certificates." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Connection
+:Connection rdf:type owl:Class ;
+            rdfs:subClassOf :ConsentPathologyOntology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ConsentPathology
+:ConsentPathology rdf:type owl:Class ;
+                  rdfs:subClassOf :ConsentPathologyOntology ;
+                  rdfs:comment "We don't instantiate these classes - They should be inferred by the reasoner" ;
+                  rdfs:isDefinedBy "Pathology Module" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ConsentPathologyOntology
+:ConsentPathologyOntology rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/DataArtefact
+:DataArtefact rdf:type owl:Class ;
+              rdfs:subClassOf :ConsentPathologyOntology ;
+              rdfs:comment "The Object Of Consent in the Connection" ;
+              rdfs:isDefinedBy "The Object Of Consent in the Connection" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/DataPrincipal
+:DataPrincipal rdf:type owl:Class ;
+               rdfs:subClassOf :ConsentPathologyOntology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/DataRequestor
+:DataRequestor rdf:type owl:Class ;
+               rdfs:subClassOf :ConsentPathologyOntology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Delegated
+:Delegated rdf:type owl:Class ;
+           rdfs:subClassOf :Participatory ;
+           owl:disjointWith :Represented ;
+           rdfs:comment "Consent is obtained from an intermediary acting on behalf of the Data Principal. (E.g. Power of Attorney)" ;
+           rdfs:isDefinedBy "Consent is obtained from an intermediary acting on behalf of the Data Principal. (E.g. Power of Attorney)" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Extrinsic
+:Extrinsic rdf:type owl:Class ;
+           rdfs:subClassOf :PrivateRealmObjects ;
+           owl:disjointWith :Intrinsic ;
+           rdfs:comment "Data Artefact is private/personal to the Data Principal, but is extrinsic, that is, external to the person. E.g. Property papers." ;
+           rdfs:isDefinedBy "Data Artefact is private/personal to the Data Principal, but is extrinsic, that is, external to the person. E.g. Property papers." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Functional
+:Functional rdf:type owl:Class ;
+            rdfs:subClassOf :ConsentPathology .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Implied
+:Implied rdf:type owl:Class ;
+         rdfs:subClassOf :NonParticipatory ;
+         rdfs:comment "Consent to data collection is deemed to have been given by the Data Principal by virtue of participation/presence in a certain place, either virtual or physical, or taking of action, or receipt of services, for which collection of said data is required." ;
+         rdfs:isDefinedBy "Consent to data collection is deemed to have been given by the Data Principal by virtue of participation/presence in a certain place, either virtual or physical, or taking of action, or receipt of services, for which collection of said data is required." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Inalienable
+:Inalienable rdf:type owl:Class ;
+             rdfs:subClassOf :Intrinsic ;
+             rdfs:comment "Data Artefact is private/personal to the Data Principal, is associated with the personhood of the Data Principal, and cannot be separated from the Data Principal. E.g. Biometric Data." ;
+             rdfs:isDefinedBy "Data Artefact is private/personal to the Data Principal, is associated with the personhood of the Data Principal, and cannot be separated from the Data Principal. E.g. Biometric Data." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Intrinsic
+:Intrinsic rdf:type owl:Class ;
+           rdfs:subClassOf :PrivateRealmObjects ;
+           rdfs:comment "Can the Data Artefact be separated from the Data Principal?" ;
+           rdfs:isDefinedBy "Data Artefact is private/personal to the Data Principal, is associated with the personhood of the Data Principal" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ModeOfConsent
+:ModeOfConsent rdf:type owl:Class ;
+               rdfs:subClassOf :ConsentPathologyOntology ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :isSubjectTo ;
+                                 owl:someValuesFrom :ConsentPathology
+                               ] ;
+               rdfs:comment "What is the mode or mediation by which consent of the Data Principal has been obtained?" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/NonParticipatory
+:NonParticipatory rdf:type owl:Class ;
+                  rdfs:subClassOf :ModeOfConsent ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :isSubjectTo ;
+                                    owl:someValuesFrom :Structural
+                                  ] ;
+                  rdfs:comment "Is the mode of consent - algorithmically superceded or implied?" ;
+                  rdfs:isDefinedBy "Non Participatory Mode Of Consent" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ObjectOfGeneralWill
+:ObjectOfGeneralWill rdf:type owl:Class ;
+                     rdfs:subClassOf :PublicRealmObjects ;
+                     rdfs:comment "Data Artefact is part of the public action realm in which the Data Principal participates and pertains to the broader expression of an individual’s choices.  E.g. An individual’s participation through collective identity or group memberships, such as in the electoral process." ;
+                     rdfs:isDefinedBy "Data Artefact is part of the public action realm in which the Data Principal participates and pertains to the broader expression of an individual’s choices.  E.g. An individual’s participation through collective identity or group memberships, such as in the electoral process." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ObjectsOfParticularWill
+:ObjectsOfParticularWill rdf:type owl:Class ;
+                         rdfs:subClassOf :PublicRealmObjects ;
+                         rdfs:comment "Data Artefact is part of the public action realm in which the Data Principal participates and pertains to the individual’s identity within a broader group or community to which the individual belongs.  E.g. An individual's political or ideological opinions, which may be different from the group to which the individual belongs." ;
+                         rdfs:isDefinedBy "Data Artefact is part of the public action realm in which the Data Principal participates and pertains to the individual’s identity within a broader group or community to which the individual belongs.  E.g. An individual's political or ideological opinions, which may be different from the group to which the individual belongs." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Participatory
+:Participatory rdf:type owl:Class ;
+               rdfs:subClassOf :ModeOfConsent ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :isSubjectTo ;
+                                 owl:someValuesFrom :Structural
+                               ] ;
+               rdfs:comment "Consent is obtained from an intermediary acting on behalf of the Data Principal." ;
+               rdfs:isDefinedBy "Consent is obtained from an intermediary representing the Data Principal.  (E.g. Company/Organisation to which the Data Principal belongs)" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/PrivateRealmObjects
+:PrivateRealmObjects rdf:type owl:Class ;
+                     rdfs:subClassOf :RealmOfConsentObject ;
+                     rdfs:comment "Is the Data Artefact associated with the personhood of the Data principal or is external to the person?" ;
+                     rdfs:isDefinedBy "Data Artefact is private/personal to the Data Principal" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/PublicRealmObjects
+:PublicRealmObjects rdf:type owl:Class ;
+                    rdfs:subClassOf :RealmOfConsentObject ;
+                    rdfs:comment "Does the Data Artefact pertain to individual's identity or petains to a broader experssion  of an individual's choices?" ;
+                    rdfs:isDefinedBy "Data Artefact is part of the public action realm." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/RealmOfConsentObject
+:RealmOfConsentObject rdf:type owl:Class ;
+                      rdfs:subClassOf :ConsentPathologyOntology ;
+                      rdfs:comment "Does the data artefact belong to the private/personal realm of activities/interests of the Data Principal, or does it belong in the realm of public or collective action/interests?" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Represented
+:Represented rdf:type owl:Class ;
+             rdfs:subClassOf :Participatory ;
+             rdfs:comment "Consent is obtained from an intermediary representing the Data Principal. (E.g. Company/Organisation to which the Data Principal belongs)" ;
+             rdfs:isDefinedBy "Consent is obtained from an intermediary representing the Data Principal. (E.g. Company/Organisation to which the Data Principal belongs)" .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/SelfDirected
+:SelfDirected rdf:type owl:Class ;
+              rdfs:subClassOf :ModeOfConsent ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :isSubjectTo ;
+                                owl:someValuesFrom :Functional
+                              ] ;
+              rdfs:comment "Consent is obtained directly from the Data Principal without involvement of any intermediary." ;
+              rdfs:isDefinedBy "Consent is obtained directly from the Data Principal without involvement of any intermediary." .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/Structural
+:Structural rdf:type owl:Class ;
+            rdfs:subClassOf :ConsentPathology .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/BypassOfConsent
+:BypassOfConsent rdf:type owl:NamedIndividual ,
+                          :Structural .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ConsentFatigue
+:ConsentFatigue rdf:type owl:NamedIndividual ,
+                         :Functional .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ErosionOfChoice
+:ErosionOfChoice rdf:type owl:NamedIndividual ,
+                          :Structural .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ErosionOfIdentity
+:ErosionOfIdentity rdf:type owl:NamedIndividual ,
+                            :Structural .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/ImperceptionOfPotentialHarms
+:ImperceptionOfPotentialHarms rdf:type owl:NamedIndividual ,
+                                       :Functional .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/IncorrectIncentives
+:IncorrectIncentives rdf:type owl:NamedIndividual ,
+                              :Functional .
+
+
+###  http://www.semanticweb.org/ontologies/2025/7/consent-ontology-dpi/InterestAggregation
+:InterestAggregation rdf:type owl:NamedIndividual ,
+                              :Structural .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :NonParticipatory
+                :Participatory
+                :SelfDirected
+              )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/z> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/moc> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/da> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/roc> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/y> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/z> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Inferring how a pathology can lead to Erosion of Identity" ;
+   rdfs:label "ErosionOfIdentity" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Participatory ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasRealm ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/z>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :PrivateRealmObjects ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/z>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :ErosionOfIdentity
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "InterestAggregation" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Participatory ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasRealm ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/z>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :PublicRealmObjects ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/z>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :InterestAggregation
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Functional Pathologies" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :SelfDirected ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/y>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :ConsentFatigue
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :ImperceptionOfPotentialHarms
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mpbja/ontologies/2025/7/consent-ontology/x> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> :IncorrectIncentives
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Relationship - Given by mode" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :ModeOfConsent ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/moc>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/da>
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/da> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/moc>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Relationship - has Realm" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/da>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :RealmOfConsentObject ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/roc>
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasRealm ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/da> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/roc>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Inferring how a pathology can lead to Bypass of Consent" ;
+   rdfs:label "BypassOfConsent" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :NonParticipatory ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasRealm ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/z>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#classPredicate> :PrivateRealmObjects ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/z>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :BypassOfConsent
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Inferring how a pathology can lead to Erosion Of Choice" ;
+   rdfs:label "ErosionOfChoice" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :NonParticipatory ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :givenByMode ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :DataArtefact ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :PublicRealmObjects ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/z>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasRealm ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/z>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :isSubjectTo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/wsl/ontologies/2025/7/consent-ontology-dpi/x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :ErosionOfChoice
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
